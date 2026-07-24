@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gemini Flash API — Senior Engineering Test Review</title>
+<style>
+:root{--ink:#17212b;--muted:#61707d;--paper:#f4f7f8;--panel:#fff;--line:#dbe3e6;--cyan:#00a7a0;--navy:#173b57;--amber:#e09b29;--red:#d6534d;--blue:#486eaa}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+a{color:var(--navy)}a:focus-visible,button:focus-visible{outline:3px solid #42c9c2;outline-offset:3px}
+.shell{max-width:1220px;margin:auto;padding:28px}
+.mast{background:var(--navy);color:white;border-radius:22px;overflow:hidden;box-shadow:0 22px 60px #173b5725}
+.mast-grid{display:grid;grid-template-columns:1.15fr .85fr;min-height:420px}
+.thesis{padding:54px}.eyebrow,.kicker{font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;text-transform:uppercase}
+.eyebrow{color:#73e5df}.thesis h1{font-size:clamp(36px,5vw,68px);line-height:.98;margin:18px 0 24px;letter-spacing:-.055em;max-width:760px}
+.thesis p{font-size:18px;color:#d6e6ed;max-width:680px}.verdict{display:inline-flex;gap:9px;align-items:center;margin-top:18px;padding:9px 13px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff2c;font-weight:700}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 6px #e09b2925}
+.score{padding:42px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#0c2c42,#1f526b)}
+.ring{width:290px;aspect-ratio:1;position:relative}.ring svg{width:100%;transform:rotate(-90deg)}.ring .inside{position:absolute;inset:0;display:grid;place-content:center;text-align:center}.inside b{font-size:56px;line-height:1}.inside span{color:#b9d0da;font-size:13px}
+.notice{margin:18px 0;background:#fff9ed;border:1px solid #edd39d;border-radius:14px;padding:14px 18px;color:#6d511d}.notice strong{color:#4f3608}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 30px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}.stat b{font-size:34px;line-height:1;display:block}.stat span{font-size:13px;color:var(--muted)}
+section{margin:30px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:14px}.section-head h2{font-size:28px;letter-spacing:-.03em;margin:0}.section-head p{color:var(--muted);margin:0;max-width:620px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+.bars{display:grid;gap:15px}.bar-row{display:grid;grid-template-columns:150px 1fr 38px;align-items:center;gap:14px;font-size:13px}.track{height:13px;background:#e9eef0;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:inherit;animation:grow .9s ease-out both}.same{background:var(--cyan)}.prod{background:var(--blue)}.stage{background:var(--amber)}.block{background:var(--red)}@keyframes grow{from{width:0}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.fill{animation:none}}
+.decision{display:grid;grid-template-columns:1fr 1fr;gap:16px}.callout{border-left:5px solid var(--cyan);background:#f3fbfa;padding:22px;border-radius:4px 14px 14px 4px}.callout.risk{border-color:var(--red);background:#fff6f5}.callout h3{margin:0 0 8px}.callout p{margin:0;color:#42515d}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.filters button{border:1px solid var(--line);background:white;border-radius:999px;padding:8px 13px;cursor:pointer;color:var(--ink)}.filters button.active{background:var(--navy);color:white;border-color:var(--navy)}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:white}table{width:100%;border-collapse:collapse;min-width:950px}th,td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{position:sticky;top:0;background:#edf3f5;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#52626e}td{font-size:13px}.feature{font-weight:750}.tag{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800;white-space:nowrap}.tag.same{color:#006b66;background:#ddf6f4}.tag.prod{color:#284d85;background:#e5edfa}.tag.stage{color:#7b4e00;background:#fff0cf}.tag.block{color:#912d28;background:#fee4e1}.evidence{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#52626e;word-break:break-all}.evidence a{font-family:inherit}
+.foot{margin:38px 0 12px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:12px}.foot a{overflow-wrap:anywhere}
+@media(max-width:800px){.shell{padding:14px}.mast-grid,.decision{grid-template-columns:1fr}.score{padding:28px}.thesis{padding:34px 26px}.stats{grid-template-columns:1fr 1fr}.section-head{display:block}.bar-row{grid-template-columns:105px 1fr 28px}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="mast">
+    <div class="mast-grid">
+      <div class="thesis">
+        <div class="eyebrow">Senior engineering review · 24 Jul 2026</div>
+        <h1>Parity is high.<br>The migration risk is concentrated.</h1>
+        <p>Across 20 evaluated feature scenarios, 18 were either equivalent or favored the production baseline. One staging regression is release-blocking: <strong>Idea to Illustrated Book</strong> frequently drops the character and fails to generate the cover.</p>
+        <div class="verdict"><span class="pulse"></span> Conditional no-go for full rollout</div>
+      </div>
+      <div class="score">
+        <div class="ring" aria-label="19 of 20 scenarios are not release blocking">
+          <svg viewBox="0 0 120 120" role="img" aria-hidden="true">
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#ffffff18" stroke-width="11"/>
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#65d8d2" stroke-width="11" stroke-linecap="round" stroke-dasharray="286.5 301.6"/>
+          </svg>
+          <div class="inside"><b>19/20</b><span>non-blocking scenarios</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="notice"><strong>Environment mapping to confirm.</strong> This review treats staging/dev as Gemini 3.5 Flash and production/original as Gemini 3.1 Flash Lite, based on the requested comparison. The source document labels environments, but does not explicitly bind model names to them.</div>
+
+  <div class="stats" aria-label="Test summary">
+    <div class="stat"><b>20</b><span>evaluated scenarios</span></div>
+    <div class="stat"><b>55%</b><span>materially similar</span></div>
+    <div class="stat"><b>35%</b><span>production preferred</span></div>
+    <div class="stat"><b>1</b><span>release-blocking regression</span></div>
+  </div>
+
+  <section aria-labelledby="distribution">
+    <div class="section-head"><div><div class="kicker">Outcome distribution</div><h2 id="distribution">The baseline wins on polish, not breadth</h2></div><p>Production was preferred in seven scenarios; most differences were qualitative. The single critical regression is functional and should be isolated before model promotion.</p></div>
+    <div class="panel bars">
+      <div class="bar-row"><span>Similar / no issue</span><div class="track"><div class="fill same" style="width:55%"></div></div><b>11</b></div>
+      <div class="bar-row"><span>Production preferred</span><div class="track"><div class="fill prod" style="width:35%"></div></div><b>7</b></div>
+      <div class="bar-row"><span>Staging advantage</span><div class="track"><div class="fill stage" style="width:5%"></div></div><b>1</b></div>
+      <div class="bar-row"><span>Staging blocker</span><div class="track"><div class="fill block" style="width:5%"></div></div><b>1</b></div>
+    </div>
+  </section>
+
+  <section class="decision" aria-label="Decision guidance">
+    <div class="callout risk"><h3>Block: Idea to Illustrated Book</h3><p>Staging commonly omits the main character and often fails to create the cover. The source explicitly marks it unusable for production. Add deterministic character-presence and cover-presence assertions before retest.</p></div>
+    <div class="callout"><h3>Proceed: scoped canary</h3><p>Keep this feature on the current production model while canarying Gemini 3.5 Flash on parity scenarios. Use blinded scoring for detail, spelling, composition, and instruction adherence to replace subjective “looks better” judgments.</p></div>
+  </section>
+
+  <section aria-labelledby="matrix">
+    <div class="section-head"><div><div class="kicker">Evidence matrix</div><h2 id="matrix">Feature-by-feature results</h2></div><p>Filter the matrix by engineering outcome. Evidence links and run UIDs are preserved from the source.</p></div>
+    <div class="filters" role="group" aria-label="Filter outcomes">
+      <button class="active" data-filter="all">All 20</button><button data-filter="same">Similar</button><button data-filter="prod">Production preferred</button><button data-filter="stage">Staging advantage</button><button data-filter="block">Blocker</button>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Feature / scenario</th><th>Outcome</th><th>Engineering interpretation</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr data-outcome="block"><td class="feature">Flipbook · Idea to Illustrated Book</td><td><span class="tag block">Blocker</span></td><td>Character frequently missing; cover frequently absent. Not production-ready.</td><td class="evidence">Prod flip938a…2c6e<br>Dev flip8d95…319f · flip938f…5789 · flip938f…12be</td></tr>
+        <tr data-outcome="same"><td class="feature">Personalized Name Bedtime Story</td><td><span class="tag same">Similar</span></td><td>No material image difference reported.</td><td class="evidence">Prod flip8dc9…857f<br>Dev flip9392…5636</td></tr>
+        <tr data-outcome="same"><td class="feature">Personalized Alphabet Book</td><td><span class="tag same">Similar</span></td><td>No issue reported.</td><td class="evidence">Prod flip9393…551b<br>Dev flip934d…35d8</td></tr>
+        <tr data-outcome="prod"><td class="feature">Kids Story Book</td><td><span class="tag prod">Production preferred</span></td><td>Both work; production shows better attention to detail.</td><td class="evidence">Dev flip9396…7a73<br>Prod flip9397…e5de</td></tr>
+        <tr data-outcome="prod"><td class="feature">Personalized Story Book</td><td><span class="tag prod">Production preferred</span></td><td>Both work; production result judged slightly better.</td><td class="evidence">Dev flip934f…412d<br>Prod flip9365…d832</td></tr>
+        <tr data-outcome="same"><td class="feature">Consistent Character StoryBook</td><td><span class="tag same">Similar</span></td><td>No issue reported.</td><td class="evidence">Dev flip9399…2387<br>Original flip939a…d736</td></tr>
+        <tr data-outcome="stage"><td class="feature">Ad Creator</td><td><span class="tag stage">Staging advantage</span></td><td>Both look good; spelling error appears only in production.</td><td class="evidence"><a href="https://prnt.sc/UtWIPGX8CsiO">Staging</a> · <a href="https://prnt.sc/6oDnWbeZlHF1">Production</a></td></tr>
+        <tr data-outcome="prod"><td class="feature">Joke Book Creator</td><td><span class="tag prod">Production preferred</span></td><td>Production result judged better.</td><td class="evidence"><a href="https://prnt.sc/aW4Mj7BczsaS">Staging</a> · <a href="https://prnt.sc/WYnjTTZiYUp_">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Clip Art</td><td><span class="tag same">Similar</span></td><td>Looks good in both environments.</td><td class="evidence"><a href="https://prnt.sc/zWZ7EOkyfjJw">Staging</a> · <a href="https://prnt.sc/cUvOncvXBgYY">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Cookbook Creator V2</td><td><span class="tag same">Similar</span></td><td>Outputs look similar.</td><td class="evidence">Stage flip8fa0…6156 · <a href="https://prnt.sc/OloJth9QghCH">image</a><br>Prod flip8fa1…9178 · <a href="https://prnt.sc/eqEVFymRpJd7">image</a></td></tr>
+        <tr data-outcome="prod"><td class="feature">Seamless Patterns</td><td><span class="tag prod">Production preferred</span></td><td>Production result judged better.</td><td class="evidence"><a href="https://prnt.sc/3Fsk07wT0M7g">Staging</a> · <a href="https://prnt.sc/VPJTOONvEqW2">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Shadow Matching Game</td><td><span class="tag same">Similar</span></td><td>Outputs look similar.</td><td class="evidence"><a href="https://prnt.sc/M8obPBn7CY0L">Staging</a> · <a href="https://prnt.sc/IEgKpMWSc5jV">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Word-to-Image Matching</td><td><span class="tag same">Similar</span></td><td>Outputs look similar.</td><td class="evidence"><a href="https://prnt.sc/JRexZ9BvXi1p">Staging</a> · <a href="https://prnt.sc/B8pSztSLcP3o">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Spot the Correct Spelling</td><td><span class="tag same">Similar</span></td><td>Outputs look similar.</td><td class="evidence"><a href="https://prnt.sc/Z9OK71bpW8IB">Staging</a> · <a href="https://prnt.sc/gTlxJMQEY2RY">Production</a></td></tr>
+        <tr data-outcome="prod"><td class="feature">Crossword</td><td><span class="tag prod">Production preferred</span></td><td>Production result judged better.</td><td class="evidence"><a href="https://prnt.sc/ESrQHuCLAi2E">Staging</a> · <a href="https://prnt.sc/PbUo3Tza8Ic5">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Word Search</td><td><span class="tag same">Similar</span></td><td>Outputs look similar.</td><td class="evidence"><a href="https://prnt.sc/hiri24x2mqe8">Staging</a> · <a href="https://prnt.sc/BUh2cYEMfzPY">Production</a></td></tr>
+        <tr data-outcome="prod"><td class="feature">Counting Numbers</td><td><span class="tag prod">Production preferred</span></td><td>Production result judged better.</td><td class="evidence"><a href="https://prnt.sc/CaO_NI8AEKIt">Staging</a> · <a href="https://prnt.sc/G00MTaB-QTm5">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Spot the Difference</td><td><span class="tag same">Similar</span></td><td>Outputs look similar.</td><td class="evidence"><a href="https://prnt.sc/9Jw0RrLaZKs1">Staging</a> · <a href="https://prnt.sc/BvtoDtrSXc3b">Production</a></td></tr>
+        <tr data-outcome="same"><td class="feature">Character Sheet</td><td><span class="tag same">Similar</span></td><td>Outputs look similar.</td><td class="evidence"><a href="https://prnt.sc/F-JDdi3QQUUd">Staging</a> · <a href="https://prnt.sc/-j0Vl16eCYUo">Production</a></td></tr>
+        <tr data-outcome="prod"><td class="feature">Image-to-Prompt Extraction</td><td><span class="tag prod">Production preferred</span></td><td>Production result judged better.</td><td class="evidence"><a href="https://prnt.sc/MvTlj8cyhJMj">Staging</a> · <a href="https://prnt.sc/U5jG1A9avDKO">Production</a></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section aria-labelledby="gaps">
+    <div class="section-head"><div><div class="kicker">Test rigor</div><h2 id="gaps">What the next run must add</h2></div></div>
+    <div class="decision">
+      <div class="panel"><strong>Coverage gap</strong><p>The Maze Template Generator / Maze Generator tab contains no test evidence and is excluded from the 20-scenario denominator.</p></div>
+      <div class="panel"><strong>Measurement gap</strong><p>No latency, error-rate, token usage, cost, sample size, prompt controls, or blinded rubric is recorded. Current conclusions establish qualitative direction—not statistical superiority.</p></div>
+    </div>
+  </section>
+
+  <footer class="foot"><span>Prepared for senior engineering review · Source evidence normalized, not re-scored.</span><a href="https://docs.google.com/document/d/1ZeBTUFWug15IY6sGYNFzhh2rYRRUGxZfIQe_hbKoVXw/edit?usp=sharing">Open original testing document</a></footer>
+</main>
+<script>
+const buttons=[...document.querySelectorAll('[data-filter]')],rows=[...document.querySelectorAll('tbody tr')];
+buttons.forEach(b=>b.addEventListener('click',()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;rows.forEach(r=>r.hidden=f!=='all'&&r.dataset.outcome!==f)}));
+</script>
+</body>
+</html>
