@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Reference Image Frame Error — Technical Comparison</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #ffffff;
+      --ink: #172433;
+      --muted: #58697a;
+      --line: #dce4eb;
+      --wash: #f5f8fb;
+      --blue: #235c91;
+      --blue-wash: #eef5fb;
+      --red: #a83d3d;
+      --red-wash: #fff3f1;
+      --green: #216947;
+      --green-wash: #eef8f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { width: min(920px, calc(100% - 40px)); margin: 48px auto 64px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    .eyebrow { margin: 0 0 8px; color: var(--blue); font-size: .78rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 760px; font-size: clamp(1.8rem, 4vw, 2.55rem); letter-spacing: -.035em; line-height: 1.12; }
+    .lead { margin: 16px 0 0; max-width: 780px; color: var(--muted); font-size: 1.08rem; }
+    section { margin-top: 30px; }
+    h2 { margin: 0 0 12px; font-size: 1.14rem; letter-spacing: -.015em; }
+    .verdict { border-left: 4px solid var(--blue); background: var(--blue-wash); padding: 15px 18px; border-radius: 0 8px 8px 0; }
+    .verdict p { margin: 0; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 9px; }
+    table { width: 100%; border-collapse: collapse; min-width: 640px; }
+    th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); background: var(--wash); font-size: .78rem; letter-spacing: .055em; text-transform: uppercase; }
+    tbody tr:last-child td { border-bottom: 0; }
+    td:first-child { width: 19%; font-weight: 650; }
+    code { overflow-wrap: anywhere; font: .92em ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .status { display: inline-block; border-radius: 999px; padding: 2px 9px; font-size: .8rem; font-weight: 700; white-space: nowrap; }
+    .failed { color: var(--red); background: var(--red-wash); }
+    .passed { color: var(--green); background: var(--green-wash); }
+    .technical { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .step { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fff; }
+    .step strong { display: block; margin-bottom: 4px; font-size: .9rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .note { margin-top: 18px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); }
+    .note strong { color: var(--ink); }
+    footer { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: .83rem; }
+    :focus-visible { outline: 3px solid #4287c5; outline-offset: 3px; }
+    @media (max-width: 650px) {
+      main { width: min(100% - 28px, 920px); margin-top: 28px; }
+      .technical { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Image input validation · technical comparison</p>
+      <h1>Why one reference image failed and the other worked</h1>
+      <p class="lead">The failed upload was a two-frame MPO file disguised by a <code>.jpg</code> extension. The successful reference was a single-frame WebP, matching the API’s one-frame requirement.</p>
+    </header>
+
+    <section aria-labelledby="finding">
+      <h2 id="finding">Finding</h2>
+      <div class="verdict"><p>The failure occurred during reference-image validation, before image generation. The backend explicitly returned <code>reference image must contain exactly one frame</code>. Direct inspection confirmed two frames in the earlier file and one frame in the successful file.</p></div>
+    </section>
+
+    <section aria-labelledby="comparison">
+      <h2 id="comparison">Run comparison</h2>
+      <div class="table-wrap" role="region" aria-label="Scrollable comparison of failed and successful runs" tabindex="0">
+        <table>
+          <thead><tr><th>Check</th><th>Failed run · Nov 4</th><th>Successful run · Nov 8</th></tr></thead>
+          <tbody>
+            <tr><td>Result</td><td><span class="status failed">Failed · HTTP 500</span><br>Validation error; 0.6 s execution</td><td><span class="status passed">Completed · HTTP 200</span><br>10.5 s execution</td></tr>
+            <tr><td>Reference file</td><td>Named <code>.jpg</code>; actual container was MPO</td><td>WebP</td></tr>
+            <tr><td>Decoded frames</td><td>2 frames: 4032 × 3024 RGB, plus 2016 × 1512 grayscale</td><td>1 frame: 2000 × 2000 RGBA</td></tr>
+            <tr><td>API / output size</td><td><code>prompt2image_qwen21</code> · 1024 × 1024</td><td><code>prompt2image_qwen21</code> · 1024 × 1024</td></tr>
+            <tr><td>Prompt</td><td>“On a marble floor near the window”</td><td>“A beautiful woman holds the phone and taking a picture.”</td></tr>
+            <tr><td>Run ID</td><td><code>01a1a682-ed35-7064-bbff-04390d540316</code></td><td><code>01a1bbae-4103-7200-8c57-d13f78629296</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="breakdown">
+      <h2 id="breakdown">Technical breakdown</h2>
+      <div class="technical">
+        <div class="step"><strong>1 · Extension is not the file format</strong><p>The old asset ended in <code>.jpg</code>, but its contents decoded as MPO. MPO can store multiple images in one file.</p></div>
+        <div class="step"><strong>2 · Input check rejected the extra frame</strong><p>The endpoint requires exactly one frame. The two-frame reference failed that check, producing the logged error before generation.</p></div>
+        <div class="step"><strong>3 · Single-frame input passed</strong><p>The new WebP decoded to one frame; the same API and 1024 × 1024 output setting then completed successfully.</p></div>
+      </div>
+      <p class="note"><strong>Evidence limit:</strong> This is a strong match to the logged frame-count error, but not a perfectly controlled test: the reference image and prompt changed between runs. Use a standard single-frame JPEG or PNG/WebP export for the earlier image and retry to isolate the variable.</p>
+    </section>
+
+    <footer>Source: the two supplied job logs and direct inspection of both reference-image files.</footer>
+  </main>
+</body>
+</html>
+
