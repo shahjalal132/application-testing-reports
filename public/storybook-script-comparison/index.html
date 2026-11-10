@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>Script to Storybook · Character-reference investigation</title>
+<style>
+:root{--ink:#192336;--muted:#4c5b71;--line:#dce2eb;--paper:#fff;--wash:#f4f6fa;--scarlet:#9d253d}*{box-sizing:border-box}html{scroll-padding-top:1rem}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,sans-serif}main{max-width:1050px;margin:auto;padding:clamp(18px,5vw,64px)}header{border-top:5px solid var(--scarlet);padding-top:1.5rem}.eyebrow,.num,.tag{font:700 .77rem/1.4 ui-monospace,monospace;letter-spacing:.045em}.eyebrow,.num,.tag,a{color:var(--scarlet)}h1{font-size:clamp(2.1rem,6vw,4rem);line-height:1.05;letter-spacing:-.055em;margin:.3em 0}h2{font-size:clamp(1.5rem,3vw,2rem);line-height:1.2;letter-spacing:-.025em}h3{font-size:1rem;margin:0 0 .45rem}p{margin:.5em 0 1em}.lede{font-size:1.18rem;max-width:72ch}.muted,footer{color:var(--muted)}nav{display:flex;flex-wrap:wrap;gap:.4rem 1.15rem;padding:.9rem 0;border-block:1px solid var(--line)}section{margin:2.65rem 0}.callout{padding:1rem 1.2rem;background:var(--wash);border-left:4px solid var(--scarlet);margin:1rem 0}.callout p:last-child,.pair p:last-child{margin-bottom:0}.table{overflow:auto}table{border-collapse:collapse;width:100%;min-width:420px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:.6rem .75rem}thead{background:var(--wash)}details{border:1px solid var(--line);border-radius:8px;margin:.55rem 0;background:var(--paper)}summary{cursor:pointer;padding:.65rem .9rem;font-weight:650;overflow-wrap:anywhere}details[open]>summary{border-bottom:1px solid var(--line)}.num{margin-right:.45rem}.tag{display:inline-block;border:1px solid var(--line);padding:.12rem .3rem;border-radius:4px;margin-left:.25rem}.note{padding:.75rem .9rem 0}.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}.pair>div{background:var(--wash);padding:.9rem}.script,pre{white-space:pre-wrap;overflow-wrap:anywhere}pre{padding:1rem;margin:0;font:inherit;background:var(--wash)}li+li{margin-top:.55rem}a:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--scarlet);outline-offset:3px}footer{border-top:1px solid var(--line);padding-top:1rem;font-size:.9rem}@media(max-width:620px){.pair{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}@media print{main{padding:0}nav{display:none}details{break-inside:avoid}}
+</style></head><body><main>
+<header><div class="eyebrow">ARTISTLY / SCRIPT TO STORYBOOK / REPRODUCTION REPORT</div><h1>Why the storybook stopped at preparation</h1><p class="lede">With the same two reference images, the original script repeatedly failed and the revised script completed. The strongest script-level difference is that the original stages supporting characters as visible actors, while the revision explicitly maps the two reference images and limits who is depicted individually.</p></header>
+<nav aria-label="Report sections"><a href="#evidence">Test evidence</a><a href="#changes">What changed</a><a href="#comparison">Page comparison</a><a href="#scripts">Full scripts</a><a href="#troubleshooting">Troubleshooting</a></nav>
+<section id="evidence"><h2>1. What the tests show</h2><p><strong>Expected:</strong> Storybook preparation completes and generates a book using the two references: Padi and Aunt Rahab. <strong>Observed:</strong> The original stopped with a generic preparation error; the rewrite completed.</p>
+<div class="table" role="region" aria-label="Test results" tabindex="0"><table><thead><tr><th scope="col">Selected page count</th><th scope="col">Original script</th><th scope="col">Modified script</th></tr></thead><tbody><tr><th scope="row">5</th><td>Failed</td><td>Not reported</td></tr><tr><th scope="row">8</th><td>Failed</td><td>Completed</td></tr><tr><th scope="row">15</th><td>Not reported</td><td>Completed</td></tr><tr><th scope="row">20</th><td>Failed</td><td>Completed</td></tr></tbody></table></div>
+<p class="muted">Tester-reported results using the same reference images. The matched 8- and 20-page runs make page count alone an unlikely explanation. A five-page output setting does not prove only the first five input pages were parsed.</p>
+<div class="callout"><strong>Leading hypothesis, not a confirmed root cause</strong><p>The preparation step may have counted one or more supporting identities as part of the illustrated cast, or failed to map the two references unambiguously. The reported two-versus-three reference prompts are consistent with this possibility. The generic error does not identify the rejected field, the counted character, or the failing validation step. The successful rewrite changed several variables together.</p></div></section>
+<section id="changes"><h2>2. What we changed</h2><ol><li><strong>Mapped each reference:</strong> image 1 = Padi; image 2 = Aunt Rahab. The header names both characters and describes their clothing.</li><li><strong>Defined the illustrated cast:</strong> only Padi and Aunt Rahab should be depicted individually. Others may appear as indistinct background figures. The revision explicitly says not to depict God as a visible character; there is no evidence that this caused the original error.</li><li><strong>Moved the spies out of staged action:</strong> Rahab retells the rooftop escape and the promise; in the rescue scene, the guides aren’t individually shown.</li><li><strong>Reduced competing subjects:</strong> shifted the cousin’s and family’s lines to Padi, kept the procession distant, and used the horns and shout as off-screen cues instead of foregrounding the priests and Joshua.</li><li><strong>Reorganized the narrative:</strong> added a title, clarified the viewpoint, and redistributed several events across pages. These are additional differences, not proven fixes.</li></ol><div class="callout"><strong>Start with pages <a href="#p3">3</a>–<a href="#p5">5</a> and <a href="#p19">19</a>.</strong> The spies enter, hide, escape, speak, hand over the cord, and return to guide the family. This is the strongest recurring-character cue in the original. <a href="#p9">Page 9</a> and <a href="#p15">page 15</a> add distinct speakers, but neither is a confirmed trigger.</div></section>
+<section id="comparison"><h2>3. Compare each page</h2><p class="muted">Open any page to read the exact text side by side. Same-numbered pages are aligned for inspection, but some events moved in the rewrite.</p><details  id="p1"><summary><span class="num">P01</span> Padi and the city walls</summary><p class="note">Both versions introduce Padi. The revision gives the illustrator one clear action: Padi looking up at the walls.</p><div class="pair"><div><h3>Original</h3><p class="script">Padi was ten years old, living in Jericho. His city had the thickest stone walls in the world. Everyone said nothing could knock them down, but lately, the city shook with fear.</p></div><div><h3>Modified</h3><p class="script">Padi was ten years old and lived in Jericho. Every morning, he looked up at the enormous stone walls surrounding his city. They seemed so strong that nothing could ever knock them down.</p></div></div></details>
+<details  id="p2"><summary><span class="num">P02</span> Aunt Rahab and the distant camp</summary><p class="note">The original introduces Rahab in exposition; the revision puts both leads together at the window and sets the camp in the distance.</p><div class="pair"><div><h3>Original</h3><p class="script">They feared the Israelites camped across the river. Padi heard stories of how their God parted the Red Sea. Jericho trusted its walls, but Aunt Rahab said stone was nothing compared to the true God.</p></div><div><h3>Modified</h3><p class="script">Padi’s Aunt Rahab lived in a house built into the city wall. One evening, Padi stood beside her window. Beyond the walls, a distant camp stretched across the land. Something important was about to happen.</p></div></div></details>
+<details open id="p3"><summary><span class="num">P03</span> The spies enter; the king sends guards <span class="tag">Cast cue</span></summary><p class="note">First strong cue for extra visible actors: two spies enter and guards pursue them. The rewrite makes the danger a conversation between Padi and Rahab; it does not stage the king or guards.</p><div class="pair"><div><h3>Original</h3><p class="script">Days ago, Aunt Rahab did something incredibly brave. Two Israelite spies came into the city. The King of Jericho sent guards to hunt them down. If caught, it meant total trouble.</p></div><div><h3>Modified</h3><p class="script">“Why is everyone afraid?” Padi asked.
+“People have heard what God has done for the Israelites,” Aunt Rahab replied. “He made a path through the sea. These walls are not stronger than Him.”</p></div></div></details>
+<details  id="p4"><summary><span class="num">P04</span> The rooftop hiding scene <span class="tag">Cast cue</span></summary><p class="note">The original gives the spies a specific physical setting and action with Rahab. The revision makes their escape something Rahab tells Padi about.</p><div class="pair"><div><h3>Original</h3><p class="script">Aunt Rahab trusted God before even meeting His people. She hid the spies on her roof under flax plants and told the guards they left. She risked everything because she had faith.</p></div><div><h3>Modified</h3><p class="script">Aunt Rahab told Padi how she had helped two Israelite visitors escape danger. She believed in their God and had protected them when they needed help. Now, their promise gave her hope.</p></div></div></details>
+<details  id="p5"><summary><span class="num">P05</span> The rope escape and the scarlet cord <span class="tag">Cast cue</span></summary><p class="note">The spies escape, hand over the cord, and speak directly. The revised illustration can show Rahab tying the cord as Padi watches; their instructions are relayed by Rahab. The shift to “our family” in the original is a minor viewpoint inconsistency, not a proven trigger.</p><div class="pair"><div><h3>Original</h3><p class="script">Before escaping down a rope, the spies promised to save our family. They gave her a scarlet cord. "Tie this red rope in your window," they said. "Gather inside, and God will protect you."</p></div><div><h3>Modified</h3><p class="script">“They told me to hang a scarlet cord in this window,” Aunt Rahab explained. “When the Israelites enter Jericho, this cord will identify our house.”
+Padi watched her carefully fasten the bright red cord.</p></div></div></details>
+<details  id="p6"><summary><span class="num">P06</span> Family gathers inside</summary><p class="note">The family is explicitly left in the background in the revision. Padi and Rahab remain the individually depicted subjects.</p><div class="pair"><div><h3>Original</h3><p class="script">Now, Padi's family squeezed inside Aunt Rahab's house, built right into the giant city wall. Padi looked at the window. The bright red cord hung there. It was their only hope.</p></div><div><h3>Modified</h3><p class="script">Aunt Rahab gathered her family into the house. Padi stayed close beside her while the others waited quietly in the background. He looked at the scarlet cord, fluttering against the enormous stone wall.</p></div></div></details>
+<details  id="p7"><summary><span class="num">P07</span> The first march</summary><p class="note">The army is reframed as a distant procession viewed from Padi’s window. A crowd mention by itself does not establish a reference requirement.</p><div class="pair"><div><h3>Original</h3><p class="script">Suddenly, loud trumpets echoed outside. Padi ran to the window. The Israelite army was marching! They weren't screaming or throwing stones; they were just walking quietly around the city walls.</p></div><div><h3>Modified</h3><p class="script">Suddenly, trumpets sounded outside.
+Padi hurried to the window. Far below, a long procession moved around Jericho. The distant figures marched in silence while the sound of horns drifted through the air.</p></div></div></details>
+<details  id="p8"><summary><span class="num">P08</span> Priests, horns, and the Ark</summary><p class="note">The original foregrounds the priests and the Ark as visual subjects. The revision foregrounds Padi and Rahab and keeps the trumpet sound.</p><div class="pair"><div><h3>Original</h3><p class="script">Priests carried a golden box called the Ark of the Covenant, blowing rams' horns. Toot! Toot! The sound made Padi's chest thump, but the soldiers behind them were completely silent.</p></div><div><h3>Modified</h3><p class="script">Padi leaned forward to look.
+“Why aren’t they attacking?” he whispered.
+Aunt Rahab stood beside him. “Sometimes obeying God means doing something we do not understand yet.”
+Padi listened to the steady trumpet calls.</p></div></div></details>
+<details  id="p9"><summary><span class="num">P09</span> A cousin speaks; the guards return <span class="tag">Cast cue</span></summary><p class="note">A distinct relative gets dialogue and the guards speak again. The rewrite transfers the reaction to Padi and Rahab.</p><div class="pair"><div><h3>Original</h3><p class="script">They walked around Jericho once and left. "That's it?" Padi's cousin whispered. The guards on the walls laughed. "They are just walking!" they shouted. But Aunt Rahab told everyone to have faith.</p></div><div><h3>Modified</h3><p class="script">The procession circled Jericho once and returned to its camp.
+“That was all?” Padi asked.
+“For today,” Aunt Rahab replied.
+The city walls remained standing, and the scarlet cord swayed gently outside their window.</p></div></div></details>
+<details  id="p10"><summary><span class="num">P10</span> The second march</summary><p class="note">The original already centers the two leads’ dialogue. The revised version makes the marching group distant and standardizes Aunt Rahab’s name.</p><div class="pair"><div><h3>Original</h3><p class="script">On Day Two, trumpets sounded again. The Israelites marched quietly around the city. "Why are they doing that?" Padi asked, holding Rahab's hand. "They are obeying their God," she whispered. "Trust Him."</p></div><div><h3>Modified</h3><p class="script">On the second morning, the trumpets sounded again. Padi took Aunt Rahab’s hand as they watched the distant procession circle the city.
+“They are doing the same thing,” he said.
+“They are being faithful,” she answered.</p></div></div></details>
+<details  id="p11"><summary><span class="num">P11</span> Days three and four</summary><p class="note">Both compress repeated activity. The rewrite centers Padi checking the cord and does not reintroduce the guards through their reaction.</p><div class="pair"><div><h3>Original</h3><p class="script">Day Three and Day Four passed the same way-one quiet trip daily. The silence was getting spooky, and the laughing stopped. Inside, Padi looked at the scarlet cord, remembering God saw them.</p></div><div><h3>Modified</h3><p class="script">The third day passed, then the fourth. Each day brought one quiet march around Jericho. Padi began to recognize the rhythm of the horns. Each evening, he checked that the scarlet cord was still secure.</p></div></div></details>
+<details  id="p12"><summary><span class="num">P12</span> Family members ask about safety</summary><p class="note">The revision gives the question to Padi instead of creating an additional speaking role for a family member.</p><div class="pair"><div><h3>Original</h3><p class="script">On Day Five and Day Six, the Israelites kept marching. Family members grew super nervous. "Are we safe in the wall?" they asked. Aunt Rahab nodded. "God is stronger than stone. Have faith."</p></div><div><h3>Modified</h3><p class="script">By the fifth day, waiting felt difficult.
+“What if the walls fall?” Padi asked.
+Aunt Rahab knelt beside him. “We will stay together, just as we were told.”
+Padi held her hand a little tighter.</p></div></div></details>
+<details  id="p13"><summary><span class="num">P13</span> The seventh day begins</summary><p class="note">The original moves directly to the army’s repeated circles. The revision uses this page for a sixth-day conversation; the seventh-day action shifts to pages 14–15.</p><div class="pair"><div><h3>Original</h3><p class="script">Sun rose on Day Seven. Something was totally different. The Israelites didn't stop after one circle. They kept walking! They completed a second circle, then a third, marching in absolute silence.</p></div><div><h3>Modified</h3><p class="script">On the sixth evening, golden light filled the room. Padi sat beside Aunt Rahab near the window.
+“I’m still frightened,” he admitted.
+“Being brave does not mean never feeling afraid,” she said. “We can be afraid and still trust.”</p></div></div></details>
+<details  id="p14"><summary><span class="num">P14</span> Priests prepare to blow the horns</summary><p class="note">The rewrite shows Padi and Rahab watching the distant procession. The original’s foreground horn action is replaced by a later sound cue.</p><div class="pair"><div><h3>Original</h3><p class="script">They circled Jericho six times! Padi's heart thwacked with excitement and fear. On the seventh time around, the entire army stopped. The world held its breath as priests lifted horns to their lips.</p></div><div><h3>Modified</h3><p class="script">Before sunrise on the seventh day, the trumpets began again. Padi and Aunt Rahab watched the distant procession complete one circle.
+But this time, it did not stop.
+A second circle began, followed by a third.</p></div></div></details>
+<details  id="p15"><summary><span class="num">P15</span> Joshua gives an order <span class="tag">Cast cue</span></summary><p class="note">Joshua is explicitly named, identified, and given dialogue in the original. The rewrite keeps the countdown here and turns the shout into an off-screen sound on page 16.</p><div class="pair"><div><h3>Original</h3><p class="script">BLAAST! The horns blew louder than ever. Joshua, Israel's leader, shouted, "Shout! For the Lord has given you the city!" Thousands of soldiers opened their mouths and let out a mighty roar.</p></div><div><h3>Modified</h3><p class="script">Padi counted carefully as the procession continued.
+“Four… five… six…”
+Then came a seventh circle.
+Padi and Aunt Rahab stood together beside the window. Outside, the whole city seemed to be holding its breath.</p></div></div></details>
+<details  id="p16"><summary><span class="num">P16</span> The ground shakes</summary><p class="note">Both focus on Padi and Rahab. The revision builds up to the wall collapse on the next page.</p><div class="pair"><div><h3>Original</h3><p class="script">CRACK! A sound like thunder ripped through the air. The ground rolled and shook. Padi grabbed Aunt Rahab's arm as the giant, unbreakable walls began to crumble like dry crackers!</p></div><div><h3>Modified</h3><p class="script">A tremendous trumpet blast filled the air. Then a mighty shout rose from beyond the walls.
+The floor trembled beneath Padi’s sandals.
+He stepped away from the window and reached for Aunt Rahab’s arm.</p></div></div></details>
+<details  id="p17"><summary><span class="num">P17</span> The walls collapse</summary><p class="note">Both preserve the event. The revision anchors the viewpoint at the window with Padi and Rahab physically present.</p><div class="pair"><div><h3>Original</h3><p class="script">Huge stones crashed down in giant clouds of dust. Left and right, the mighty walls tumbled to the earth. Noise was deafening, but inside their room, nothing was moving at all.</p></div><div><h3>Modified</h3><p class="script">CRACK!
+Beyond their window, huge stones began to tumble. Dust rolled across the city as the walls collapsed.
+Aunt Rahab held Padi close.
+He shut his eyes while the crashing echoed around them.</p></div></div></details>
+<details  id="p18"><summary><span class="num">P18</span> The house and cord survive</summary><p class="note">The outcome remains the same; the revision shows it through Padi’s reaction without introducing another character.</p><div class="pair"><div><h3>Original</h3><p class="script">It was a total miracle! The entire wall fell flat, except for the small piece holding Aunt Rahab's house. Their home stood perfectly still. The bright scarlet cord still hung safely in the window.</p></div><div><h3>Modified</h3><p class="script">At last, the noise faded.
+Padi opened his eyes. Their room was still standing!
+The section of wall supporting Aunt Rahab’s house remained in place. Outside the window, the scarlet cord shone through the settling dust.</p></div></div></details>
+<details  id="p19"><summary><span class="num">P19</span> The same two spies return <span class="tag">Cast cue</span></summary><p class="note">The spies guide the family in the original, making them recurring visual actors. The revision has Padi walk beside Rahab, the family follow in the background, and the guides remain unidentified.</p><div class="pair"><div><h3>Original</h3><p class="script">The two spies ran through the thick dust, leading Padi's family out safely to join Israel. Jericho's strong walls couldn't save the city, but their faith in God kept them completely safe.</p></div><div><h3>Modified</h3><p class="script">When it was safe to leave, Padi walked out beside Aunt Rahab. Their family followed in the background as they were guided toward the Israelite camp.
+Padi looked back once at the little house that had sheltered them.</p></div></div></details>
+<details  id="p20"><summary><span class="num">P20</span> The ending</summary><p class="note">Both end with Padi and Rahab. The revision expresses the resolution through dialogue and Padi’s realization rather than an explicit closing moral.</p><div class="pair"><div><h3>Original</h3><p class="script">Padi smiled up at Aunt Rahab as they walked into a new future. He knew now that no matter how big or scary a problem looks, God is always bigger!</p></div><div><h3>Modified</h3><p class="script">Padi smiled up at Aunt Rahab as they walked toward a new beginning.
+“I thought the walls were the strongest thing in Jericho,” he said.
+Aunt Rahab squeezed his hand.
+Padi understood now: their hope had never been in stone.</p></div></div></details></section>
+<section id="scripts"><h2>4. Full scripts</h2><p>Complete text for controlled retesting. The reference and cast instructions are part of the modified input.</p><details><summary>Original script · 20 pages</summary><pre>Page 1
+Padi was ten years old, living in Jericho. His city had the thickest stone walls in the world. Everyone said nothing could knock them down, but lately, the city shook with fear.
+
+Page 2
+They feared the Israelites camped across the river. Padi heard stories of how their God parted the Red Sea. Jericho trusted its walls, but Aunt Rahab said stone was nothing compared to the true God.
+
+Page 3
+Days ago, Aunt Rahab did something incredibly brave. Two Israelite spies came into the city. The King of Jericho sent guards to hunt them down. If caught, it meant total trouble.
+
+Page 4
+Aunt Rahab trusted God before even meeting His people. She hid the spies on her roof under flax plants and told the guards they left. She risked everything because she had faith.
+
+Page 5
+Before escaping down a rope, the spies promised to save our family. They gave her a scarlet cord. "Tie this red rope in your window," they said. "Gather inside, and God will protect you."
+
+Page 6
+Now, Padi's family squeezed inside Aunt Rahab's house, built right into the giant city wall. Padi looked at the window. The bright red cord hung there. It was their only hope.
+
+Page 7
+Suddenly, loud trumpets echoed outside. Padi ran to the window. The Israelite army was marching! They weren't screaming or throwing stones; they were just walking quietly around the city walls.
+
+Page 8
+Priests carried a golden box called the Ark of the Covenant, blowing rams' horns. Toot! Toot! The sound made Padi's chest thump, but the soldiers behind them were completely silent.
+
+Page 9
+They walked around Jericho once and left. "That's it?" Padi's cousin whispered. The guards on the walls laughed. "They are just walking!" they shouted. But Aunt Rahab told everyone to have faith.
+
+Page 10
+On Day Two, trumpets sounded again. The Israelites marched quietly around the city. "Why are they doing that?" Padi asked, holding Rahab's hand. "They are obeying their God," she whispered. "Trust Him."
+
+Page 11
+Day Three and Day Four passed the same way-one quiet trip daily. The silence was getting spooky, and the laughing stopped. Inside, Padi looked at the scarlet cord, remembering God saw them.
+
+Page 12
+On Day Five and Day Six, the Israelites kept marching. Family members grew super nervous. "Are we safe in the wall?" they asked. Aunt Rahab nodded. "God is stronger than stone. Have faith."
+
+Page 13
+Sun rose on Day Seven. Something was totally different. The Israelites didn't stop after one circle. They kept walking! They completed a second circle, then a third, marching in absolute silence.
+
+Page 14
+They circled Jericho six times! Padi's heart thwacked with excitement and fear. On the seventh time around, the entire army stopped. The world held its breath as priests lifted horns to their lips.
+
+Page 15
+BLAAST! The horns blew louder than ever. Joshua, Israel's leader, shouted, "Shout! For the Lord has given you the city!" Thousands of soldiers opened their mouths and let out a mighty roar.
+
+Page 16
+CRACK! A sound like thunder ripped through the air. The ground rolled and shook. Padi grabbed Aunt Rahab's arm as the giant, unbreakable walls began to crumble like dry crackers!
+
+Page 17
+Huge stones crashed down in giant clouds of dust. Left and right, the mighty walls tumbled to the earth. Noise was deafening, but inside their room, nothing was moving at all.
+
+Page 18
+It was a total miracle! The entire wall fell flat, except for the small piece holding Aunt Rahab's house. Their home stood perfectly still. The bright scarlet cord still hung safely in the window.
+
+Page 19
+The two spies ran through the thick dust, leading Padi's family out safely to join Israel. Jericho's strong walls couldn't save the city, but their faith in God kept them completely safe.
+
+Page 20
+Padi smiled up at Aunt Rahab as they walked into a new future. He knew now that no matter how big or scary a problem looks, God is always bigger!</pre></details><details><summary>Modified script · reference header and 20 pages</summary><pre>Title: Padi and the Scarlet Cord
+
+CHARACTER REFERENCES
+Reference image 1: Padi, a ten-year-old boy with short dark hair, wearing a green tunic, brown trousers, and sandals.
+Reference image 2: Aunt Rahab, an adult woman wearing a red dress, a gold outer robe, a matching head covering, and sandals.
+
+Padi and Aunt Rahab are the only individually depicted characters. Maintain their reference appearances and clothing throughout the book. Other people may appear only as distant, indistinct background figures. Do not portray God as a visible character.
+
+Page 1
+Padi was ten years old and lived in Jericho. Every morning, he looked up at the enormous stone walls surrounding his city. They seemed so strong that nothing could ever knock them down.
+
+Page 2
+Padi’s Aunt Rahab lived in a house built into the city wall. One evening, Padi stood beside her window. Beyond the walls, a distant camp stretched across the land. Something important was about to happen.
+
+Page 3
+“Why is everyone afraid?” Padi asked.
+“People have heard what God has done for the Israelites,” Aunt Rahab replied. “He made a path through the sea. These walls are not stronger than Him.”
+
+Page 4
+Aunt Rahab told Padi how she had helped two Israelite visitors escape danger. She believed in their God and had protected them when they needed help. Now, their promise gave her hope.
+
+Page 5
+“They told me to hang a scarlet cord in this window,” Aunt Rahab explained. “When the Israelites enter Jericho, this cord will identify our house.”
+Padi watched her carefully fasten the bright red cord.
+
+Page 6
+Aunt Rahab gathered her family into the house. Padi stayed close beside her while the others waited quietly in the background. He looked at the scarlet cord, fluttering against the enormous stone wall.
+
+Page 7
+Suddenly, trumpets sounded outside.
+Padi hurried to the window. Far below, a long procession moved around Jericho. The distant figures marched in silence while the sound of horns drifted through the air.
+
+Page 8
+Padi leaned forward to look.
+“Why aren’t they attacking?” he whispered.
+Aunt Rahab stood beside him. “Sometimes obeying God means doing something we do not understand yet.”
+Padi listened to the steady trumpet calls.
+
+Page 9
+The procession circled Jericho once and returned to its camp.
+“That was all?” Padi asked.
+“For today,” Aunt Rahab replied.
+The city walls remained standing, and the scarlet cord swayed gently outside their window.
+
+Page 10
+On the second morning, the trumpets sounded again. Padi took Aunt Rahab’s hand as they watched the distant procession circle the city.
+“They are doing the same thing,” he said.
+“They are being faithful,” she answered.
+
+Page 11
+The third day passed, then the fourth. Each day brought one quiet march around Jericho. Padi began to recognize the rhythm of the horns. Each evening, he checked that the scarlet cord was still secure.
+
+Page 12
+By the fifth day, waiting felt difficult.
+“What if the walls fall?” Padi asked.
+Aunt Rahab knelt beside him. “We will stay together, just as we were told.”
+Padi held her hand a little tighter.
+
+Page 13
+On the sixth evening, golden light filled the room. Padi sat beside Aunt Rahab near the window.
+“I’m still frightened,” he admitted.
+“Being brave does not mean never feeling afraid,” she said. “We can be afraid and still trust.”
+
+Page 14
+Before sunrise on the seventh day, the trumpets began again. Padi and Aunt Rahab watched the distant procession complete one circle.
+But this time, it did not stop.
+A second circle began, followed by a third.
+
+Page 15
+Padi counted carefully as the procession continued.
+“Four… five… six…”
+Then came a seventh circle.
+Padi and Aunt Rahab stood together beside the window. Outside, the whole city seemed to be holding its breath.
+
+Page 16
+A tremendous trumpet blast filled the air. Then a mighty shout rose from beyond the walls.
+The floor trembled beneath Padi’s sandals.
+He stepped away from the window and reached for Aunt Rahab’s arm.
+
+Page 17
+CRACK!
+Beyond their window, huge stones began to tumble. Dust rolled across the city as the walls collapsed.
+Aunt Rahab held Padi close.
+He shut his eyes while the crashing echoed around them.
+
+Page 18
+At last, the noise faded.
+Padi opened his eyes. Their room was still standing!
+The section of wall supporting Aunt Rahab’s house remained in place. Outside the window, the scarlet cord shone through the settling dust.
+
+Page 19
+When it was safe to leave, Padi walked out beside Aunt Rahab. Their family followed in the background as they were guided toward the Israelite camp.
+Padi looked back once at the little house that had sheltered them.
+
+Page 20
+Padi smiled up at Aunt Rahab as they walked toward a new beginning.
+“I thought the walls were the strongest thing in Jericho,” he said.
+Aunt Rahab squeezed his hand.
+Padi understood now: their hope had never been in stone.</pre></details></section>
+<section id="troubleshooting"><h2>5. Troubleshooting and engineering follow-up</h2><ol><li><strong>Reproduce at one fixed setting.</strong> Use the same Script to Storybook build, mode, two image files, upload order, and 8- or 20-page setting. Run the original and modified inputs as controls. Record exact input text, output page setting, build, timestamp, and job/reference ID in the internal tracker.</li><li><strong>Test the mapping alone.</strong> Add only the two image-to-name mappings to the original. Leave the story and cast directions unchanged. If it completes repeatedly, mapping becomes a stronger explanation.</li><li><strong>Test cast scoping next.</strong> Keep the mapping and add only the two-lead depiction instruction. If it still fails, reframe only pages 3–5 and 19 so the spies are relayed rather than staged. Test the cousin and Joshua separately if needed. These are proposed runs, not reported results.</li><li><strong>Compare the preparation results.</strong> Check the detected character inventory, recurring-role flags, reference-index assignments, requested versus supplied references, first validation error, and whether illustration jobs were scheduled. Compare original and successful runs before attributing the failure to any one character.</li><li><strong>Improve recovery guidance.</strong> If a cast/reference mismatch is confirmed, show which characters were detected and which references were assigned. Offer a way to distinguish referenced leads from incidental figures and explain what to change instead of showing only a generic error.</li></ol><div class="callout"><strong>Practical workaround</strong><p>Use the tested modified script with one image per lead in the matching order. If the author wants a supporting character visibly recognizable across scenes, confirm that intent and test an explicit mapping rather than assuming they must remove the role.</p></div></section>
+<footer>Evidence: original and revised scripts supplied for comparison; reproduction outcomes reported by the tester. Preparation internals were not verified.</footer>
+</main><script>
+function revealPage(){const id=location.hash.slice(1);if(!/^p\d+$/.test(id))return;const page=document.getElementById(id);if(page){page.open=true;page.scrollIntoView();}}
+addEventListener('hashchange',revealPage);revealPage();
+</script></body></html>
