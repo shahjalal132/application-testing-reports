@@ -8,5 +8,6 @@ The interactive report is published from [`index.html`](./index.html).
 
 - [Gemini Flash API comparison](./index.html)
 - [CloneVoice pronunciation editor demo](./public/clonevoice-pronunciation-editor-report/index.html)
+- [Merch Magic pet portrait reproduction](./public/merch-magic-reproduction/index.html)
 
 Cloudflare serves the deployable site from `public/`.
